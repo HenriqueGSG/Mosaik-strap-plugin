@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "develops",
+  "info": {
+    "singularName": "develop",
+    "pluralName": "develops",
+    "displayName": "Develop"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "rule": {
+      "type": "json"
+    }
+  }
+}

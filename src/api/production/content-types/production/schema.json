@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productions",
+  "info": {
+    "singularName": "production",
+    "pluralName": "productions",
+    "displayName": "Production"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "rule": {
+      "type": "json"
+    },
+    "temps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::temp.temp",
+      "mappedBy": "production"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "temps",
+  "info": {
+    "singularName": "temp",
+    "pluralName": "temps",
+    "displayName": "Temp",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "rule": {
+      "type": "json"
+    },
+    "production": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::production.production",
+      "inversedBy": "temps"
+    },
+    "description": {
+      "type": "text"
+    },
+    "issueLink": {
+      "type": "string"
+    },
+    "issueNumber": {
+      "type": "string"
+    }
+  }
+}
