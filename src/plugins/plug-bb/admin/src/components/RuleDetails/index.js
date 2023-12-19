@@ -17,10 +17,10 @@ import {
   Initials,
 } from "@strapi/design-system";
 
-const RuleDetails = ({ prodRule, preProdRules }) => {
+const RuleDetails = ({ prodRule, preProdRules, ruleToUpdate }) => {
   return (
     <>
-      <Box paddingTop={8} gap={10}>
+      <Box paddingTop={5} gap={10}>
         <Box>
           <Flex direction="column" display="inline">
             <FieldLabel>
@@ -29,13 +29,13 @@ const RuleDetails = ({ prodRule, preProdRules }) => {
             <FieldInput
               padding={4}
               disabled
-              value={prodRule["Name"]}
+              value={prodRule["attributes"]["Name"]}
               type="text"
             />
             <JSONInput
               paddingTop={4}
               disabled
-              value={JSON.stringify(prodRule["rule"], null, 2)}
+              value={JSON.stringify(prodRule["attributes"]["rule"], null, 2)}
               style={{ maxHeight: "600px" }}
             ></JSONInput>
           </Flex>
@@ -44,14 +44,12 @@ const RuleDetails = ({ prodRule, preProdRules }) => {
           <Flex direction="column" display="inline" gap={4}>
             <Box paddingTop={4}>
               <FieldLabel>
-                <Typography variant={"beta"}>Regra PROD TEMP</Typography>
+                <Typography variant={"beta"}>Regra PRÉ-PROD</Typography>
                 <Box paddingLeft={2}>
                   <Link
                     href={preProdRules["attributes"]["issueLink"]}
                     isExternal
-                  >
-                    #{preProdRules["attributes"]["issueNumber"]}
-                  </Link>
+                  ></Link>
                 </Box>
               </FieldLabel>
             </Box>

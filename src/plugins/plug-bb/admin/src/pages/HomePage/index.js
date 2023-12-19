@@ -18,8 +18,10 @@ import axios from "axios";
 import SelectField from "../../components/SelectField";
 import ProdModal from "../../components/ProdModal";
 import {
+  deleteAfterUpdate,
   fetchRulesIdsAndNames,
   fetchRulesWithTemps,
+  updateRule,
 } from "../../services/rules-api";
 import RuleDetails from "../../components/RuleDetails";
 import { LoadingIndicatorPage } from "@strapi/helper-plugin";
@@ -32,6 +34,7 @@ const HomePage = () => {
   const [preProdRules, setPreProdRules] = useState(null);
   const [selectedRule, setSelectedRule] = useState(null);
   const [productions, setProductions] = useState([]);
+  const [ruleToUpdate, setRuleToUpdate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -69,37 +72,53 @@ const HomePage = () => {
     }
   };
 
-  const updateRule = async (preProdRuleV, prodRuleV) => {
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      const idRule = prodRuleV["id"];
+  // const updateRule = async (preProdRuleV, prodRuleV) => {
+  //   try {
+  //     const headers = {
+  //       "Content-Type": "application/json",
+  //     };
+  //     const idRule = prodRuleV["id"];
 
-      prodRuleV["rule"] = preProdRuleV["attributes"]["rule"];
-      const response = await axios.put(
-        `${BASE_URL}${idRule}`,
-        { data: prodRuleV },
-        {
-          headers,
-        }
-      );
-      const responseData = response.data;
-      const { id, attributes } = responseData["data"];
-      const { Name, rule } = attributes;
-      setProdRule({ id, Name, rule });
-    } catch (error) {
-      console.error("Error updating rule:", error);
-    }
-  };
+  //     prodRuleV["rule"] = preProdRuleV["attributes"]["rule"];
+  //     const response = await axios.put(
+  //       `${BASE_URL}${idRule}`,
+  //       { data: prodRuleV },
+  //       {
+  //         headers,
+  //       }
+  //     );
+
+  //    deleteAfterUpdate()
+
+  //     // const delResp = await axios.delete(`http://localhost:1337/api/temps/${preProdRuleV['id']}`)
+
+  //     const responseData = response.data;
+  //     console.log(responseData, "RESP AFTER UPDATE");
+  //   } catch (error) {
+  //     console.error("Error updating rule:", error);
+  //   }
+  // };
 
   const handleUpdateRule = () => {
     updateRule(preProdRules, prodRule);
+
+    window.location.href =
+      "localhost:1337/admin/content-manager/collectionType/api::production.production?";
   };
 
-  const handleSelectChange = (value) => {
-    setSelectedRule(value);
-    fetchData(value);
+  const handleSelectChange = (selectedRuleOption) => {
+    const selectedRuleOptionObj = JSON.parse(selectedRuleOption);
+
+    // setSelectedRule(selectedRuleOptionObj["attributes"]["name"]);
+
+    console.log(selectedRuleOptionObj["attributes"]["name"], "NAME RULE");
+    // console.log(JSON.parse(value), "SELECTERD OBJ");
+    setProdRule(selectedRuleOptionObj["attributes"]["production"]["data"]);
+    setPreProdRules(selectedRuleOptionObj);
+    setSelectedRule(selectedRuleOptionObj["attributes"]["name"]);
+
+    // fetchData(value);
+    console.log(selectedRule);
   };
 
   // if (isLoading) return <LoadingIndicatorPage />;
@@ -147,7 +166,11 @@ const HomePage = () => {
                 handleSelectChange={handleSelectChange}
                 selectedRule={selectedRule}
               ></SelectField>
-              <RuleDetails prodRule={prodRule} preProdRules={preProdRules} />
+              <RuleDetails
+                prodRule={prodRule}
+                preProdRules={preProdRules}
+                ruleToUpdate={ruleToUpdate}
+              />
 
               <Flex direction="row" gap={2} paddingTop={2}>
                 <DialogUpdate

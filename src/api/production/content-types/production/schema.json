@@ -4,7 +4,8 @@
   "info": {
     "singularName": "production",
     "pluralName": "productions",
-    "displayName": "Production"
+    "displayName": "Production",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,11 +18,11 @@
     "rule": {
       "type": "json"
     },
-    "temps": {
+    "temp": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::temp.temp",
-      "mappedBy": "production"
+      "inversedBy": "production"
     }
   }
 }

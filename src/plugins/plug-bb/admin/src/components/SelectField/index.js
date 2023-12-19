@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Flex, SingleSelect, SingleSelectOption } from "@strapi/design-system";
+import {
+  Badge,
+  Box,
+  Flex,
+  SingleSelect,
+  SingleSelectOption,
+} from "@strapi/design-system";
 const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
   //   const [selectedValue, setSelectedValue] = useState(null);
   const [error, toggleError] = useState();
@@ -10,7 +16,7 @@ const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
   //     console.log(selectedValue);
   //   };
   return (
-    <Flex direction="column" alignItems="stretch" gap={11}>
+    <Flex direction="column" alignItems="stretch" gap={5}>
       <SingleSelect
         label="Regras em produção"
         required
@@ -19,16 +25,21 @@ const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
         error={error}
         disabled={disabled}
         onChange={handleSelectChange}
-        value={selectedRule}
+        value={selectedRule ? selectedRule : "NO RULE SELECTED"}
       >
         {selectFieldData["data"]?.map((item) => {
           return (
-            <SingleSelectOption key={item["id"]} value={item["id"]}>
-              {item["attributes"]["Name"]}
+            <SingleSelectOption key={item["id"]} value={JSON.stringify(item)}>
+              {item["attributes"]["name"]}
             </SingleSelectOption>
           );
         })}
       </SingleSelect>
+      {selectedRule && (
+        <Box>
+          <Badge size="M" active={true} children={selectedRule}></Badge>
+        </Box>
+      )}
     </Flex>
   );
 };

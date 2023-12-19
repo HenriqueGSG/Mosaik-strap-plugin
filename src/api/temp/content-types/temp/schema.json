@@ -12,26 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "production": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::production.production",
+      "mappedBy": "temp"
+    },
     "name": {
+      "type": "string"
+    },
+    "issueLink": {
       "type": "string"
     },
     "rule": {
       "type": "json"
     },
-    "production": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::production.production",
-      "inversedBy": "temps"
-    },
     "description": {
       "type": "text"
-    },
-    "issueLink": {
-      "type": "string"
-    },
-    "issueNumber": {
-      "type": "string"
     }
   }
 }
