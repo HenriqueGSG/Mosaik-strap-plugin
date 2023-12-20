@@ -13,71 +13,49 @@ import {
   JSONInput,
   Typography,
   Link,
-  Avatar,
-  Initials,
 } from "@strapi/design-system";
 
-const RuleDetails = ({ prodRule, preProdRules, ruleToUpdate }) => {
+const RuleDisplay = ({ rule, title, link, isProd }) => (
+  <Box paddingTop={5}>
+    <Flex direction="column" display="inline" gap={4}>
+      <FieldLabel>
+        <Typography variant={"beta"}>{title}</Typography>
+        {link && (
+          <Box paddingLeft={2}>
+            <Link href={link} isExternal />
+          </Box>
+        )}
+      </FieldLabel>
+      <FieldInput
+        disabled
+        value={isProd ? rule["Name"] : rule["name"]}
+        type="text"
+      />
+      <Typography variant="epsilon">{rule["description"]}</Typography>
+      <JSONInput
+        paddingTop={4}
+        disabled
+        value={JSON.stringify(rule["rule"], null, 2)}
+        style={{ maxHeight: "600px" }}
+      />
+    </Flex>
+  </Box>
+);
+
+const RuleDetails = ({ prodRule, preProdRules }) => {
   return (
     <>
       <Box paddingTop={5} gap={10}>
-        <Box>
-          <Flex direction="column" display="inline">
-            <FieldLabel>
-              <Typography>Regra PROD</Typography>
-            </FieldLabel>
-            <FieldInput
-              padding={4}
-              disabled
-              value={prodRule["attributes"]["Name"]}
-              type="text"
-            />
-            <JSONInput
-              paddingTop={4}
-              disabled
-              value={JSON.stringify(prodRule["attributes"]["rule"], null, 2)}
-              style={{ maxHeight: "600px" }}
-            ></JSONInput>
-          </Flex>
-        </Box>
-        <Box paddingTop={8}>
-          <Flex direction="column" display="inline" gap={4}>
-            <Box paddingTop={4}>
-              <FieldLabel>
-                <Typography variant={"beta"}>Regra PRÉ-PROD</Typography>
-                <Box paddingLeft={2}>
-                  <Link
-                    href={preProdRules["attributes"]["issueLink"]}
-                    isExternal
-                  ></Link>
-                </Box>
-              </FieldLabel>
-            </Box>
-            <Box paddingTop={1}>
-              <FieldInput
-                disabled
-                value={preProdRules["attributes"]["name"]}
-                type="text"
-              />
-
-              {/* <Initials>MF</Initials> */}
-
-              <Typography variant={"epsilon"}>
-                {preProdRules["attributes"]["description"]}
-              </Typography>
-            </Box>
-            <JSONInput
-              paddingTop={4}
-              value={JSON.stringify(
-                preProdRules["attributes"]["rule"],
-                null,
-                2
-              )}
-              style={{ maxHeight: "600px" }}
-              disabled
-            ></JSONInput>
-          </Flex>
-        </Box>
+        <RuleDisplay
+          rule={prodRule["attributes"]}
+          title="Regra PROD"
+          isProd={true}
+        />
+        <RuleDisplay
+          rule={preProdRules["attributes"]}
+          title="Regra PRÉ-PROD"
+          link={preProdRules["attributes"]["issueLink"]}
+        />
       </Box>
     </>
   );

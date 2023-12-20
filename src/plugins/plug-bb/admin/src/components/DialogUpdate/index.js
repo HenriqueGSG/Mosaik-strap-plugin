@@ -21,7 +21,7 @@ import {
   Typography,
 } from "@strapi/design-system";
 
-const DialogUpdate = ({ handleUpdateRule, preProdRule, prodRulesId }) => {
+const DialogUpdate = ({ handleUpdateRule }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (

@@ -7,14 +7,14 @@ import {
   SingleSelectOption,
 } from "@strapi/design-system";
 const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
-  //   const [selectedValue, setSelectedValue] = useState(null);
-  const [error, toggleError] = useState();
-  const [disabled, toggleDisabled] = useState(false);
+  const renderSelectOptions = () => {
+    return selectFieldData["data"]?.map((item) => (
+      <SingleSelectOption key={item["id"]} value={JSON.stringify(item)}>
+        {item["attributes"]["name"]}
+      </SingleSelectOption>
+    ));
+  };
 
-  //   const handleSelectChange = (value) => {
-  //     setSelectedValue(value);
-  //     console.log(selectedValue);
-  //   };
   return (
     <Flex direction="column" alignItems="stretch" gap={5}>
       <SingleSelect
@@ -22,22 +22,16 @@ const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
         required
         placeholder="Selecione a regra em prod"
         // hint="Regras em produção"
-        error={error}
-        disabled={disabled}
         onChange={handleSelectChange}
-        value={selectedRule ? selectedRule : "NO RULE SELECTED"}
+        value={selectedRule}
       >
-        {selectFieldData["data"]?.map((item) => {
-          return (
-            <SingleSelectOption key={item["id"]} value={JSON.stringify(item)}>
-              {item["attributes"]["name"]}
-            </SingleSelectOption>
-          );
-        })}
+        {renderSelectOptions()}
       </SingleSelect>
       {selectedRule && (
         <Box>
-          <Badge size="M" active={true} children={selectedRule}></Badge>
+          <Badge size="M" active={true}>
+            {selectedRule}
+          </Badge>
         </Box>
       )}
     </Flex>
