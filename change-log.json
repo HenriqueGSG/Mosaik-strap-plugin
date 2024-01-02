@@ -1,0 +1,27 @@
+[
+  {
+    "id": 5,
+    "currentRule": {
+      "_v": 444,
+      "border": "2px solid lime"
+    },
+    "oldRules": [
+      {
+        "_v": 333,
+        "border": "2px solid lime"
+      },
+      {
+        "_v": 222,
+        "border": "2px solid lime"
+      },
+      {
+        "_v": 777,
+        "border": "2px solid lime"
+      },
+      {
+        "_v": 111,
+        "border": "2px solid lime"
+      }
+    ]
+  }
+]

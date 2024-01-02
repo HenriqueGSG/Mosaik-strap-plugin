@@ -1,5 +1,5 @@
-import { request } from "@strapi/helper-plugin";
 import axios from "axios";
+
 const BASE_URL_PRODUCTIONS = "http://localhost:1337/api/productions/";
 const BASE_URL_TEMPS = "http://localhost:1337/api/temps/";
 export const fetchRulesIdsAndNames = async () => {
@@ -76,8 +76,8 @@ export const updateRule = async (preProdRule, prodRule) => {
         headers,
       }
     );
-
-    deleteAfterUpdate(response, preProdRule);
+    // deleteAfterUpdate(response, preProdRule);
+    // window.location.href = `http://localhost:1337/admin/content-manager/collectionType/api::production.production/${prodRule["id"]}`;
   } catch (error) {
     console.error("Error updating rule:", error);
   }
