@@ -23,5 +23,47 @@
         "border": "2px solid lime"
       }
     ]
+  },
+  {
+    "id": 3,
+    "currentRule": {
+      "_v": 222,
+      "border": "2px solid lime"
+    },
+    "oldRules": [
+      {
+        "_v": 111,
+        "border": "2px solid lime"
+      },
+      {
+        "_v": 221312312,
+        "border": "2px solid lime",
+        "coordinatadsadasdes": {
+          "type": "array",
+          "count": 2,
+          "items": "{{float(0, 120, 5)}}"
+        },
+        "coordinatesasasass": {
+          "type": "array",
+          "count": 2,
+          "items": "{{float(0, 120, 5)}}"
+        },
+        "coordinatesas": {
+          "type": "array",
+          "count": 2,
+          "items": "{{float(0, 120, 5)}}"
+        },
+        "coordinatessa": {
+          "type": "arraysas",
+          "count": 2,
+          "items": "{{float(0, 120, 5)}}"
+        },
+        "coordinates": [
+          38.48113,
+          9.26963
+        ],
+        "password": "xXbasilisk-*******"
+      }
+    ]
   }
 ]

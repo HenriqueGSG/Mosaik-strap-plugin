@@ -43,18 +43,16 @@ const RuleDisplay = ({ rule, title, link, isProd }) => (
 );
 
 const RuleDetails = ({ prodRule, preProdRules }) => {
+  console.log(prodRule, `RULE DETAILS`);
+  console.log(preProdRules);
   return (
     <>
       <Box paddingTop={5} gap={10}>
+        <RuleDisplay rule={prodRule} title="Regra PROD" isProd={true} />
         <RuleDisplay
-          rule={prodRule["attributes"]}
-          title="Regra PROD"
-          isProd={true}
-        />
-        <RuleDisplay
-          rule={preProdRules["attributes"]}
+          rule={preProdRules}
           title="Regra PRÉ-PROD"
-          link={preProdRules["attributes"]["issueLink"]}
+          link={preProdRules["issueLink"]}
         />
       </Box>
     </>

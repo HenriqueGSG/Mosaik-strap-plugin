@@ -7,10 +7,12 @@ import {
   SingleSelectOption,
 } from "@strapi/design-system";
 const SelectField = ({ handleSelectChange, selectedRule, selectFieldData }) => {
+  console.log(selectFieldData, "SELECT FIELD DATA");
+  // ALTERAR AQUI
   const renderSelectOptions = () => {
-    return selectFieldData["data"]?.map((item) => (
+    return selectFieldData?.map((item) => (
       <SingleSelectOption key={item["id"]} value={JSON.stringify(item)}>
-        {item["attributes"]["name"]}
+        {item["name"]}
       </SingleSelectOption>
     ));
   };

@@ -14,9 +14,10 @@ import {
 } from "@strapi/design-system";
 import SelectField from "../../components/SelectField";
 import RuleDetails from "../../components/RuleDetails";
-import { LoadingIndicatorPage } from "@strapi/helper-plugin";
+import { LoadingIndicatorPage, useFetchClient } from "@strapi/helper-plugin";
 import DialogUpdate from "../../components/DialogUpdate";
 import useRuleManagement from "../../hooks/useRuleManagement";
+import { useRulesIdsAndNames } from "../../services/rules-api";
 
 const HomePage = () => {
   const {
@@ -30,8 +31,10 @@ const HomePage = () => {
     handleSelectChange,
   } = useRuleManagement();
 
+  const fetchRulesIdsAndNames = useRulesIdsAndNames();
   useEffect(() => {
     fetchData();
+    // fetchData();
   }, []);
 
   if (isLoading) return <LoadingIndicatorPage />;

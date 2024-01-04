@@ -8,10 +8,11 @@ const useRuleManagement = () => {
   const [productions, setProductions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // alterar nome
+  // alterar A CHAMADA PARA A NOVA
   const fetchData = async () => {
     try {
       const data = await fetchRulesIdsAndNames();
+      console.log(data, "INTERNAL");
       setProductions(data);
       setIsLoading(false);
     } catch (error) {
@@ -24,12 +25,12 @@ const useRuleManagement = () => {
     updateRule(preProdRules, prodRule);
     // Additional logic if needed
   };
-
+  // CHANGE HOW TO GET THE DATA
   const handleSelectChange = (selectedRuleOption) => {
     const selectedRuleOptionObj = JSON.parse(selectedRuleOption);
-    setProdRule(selectedRuleOptionObj["attributes"]["production"]["data"]);
+    setProdRule(selectedRuleOptionObj["production"]);
     setPreProdRules(selectedRuleOptionObj);
-    setSelectedRule(selectedRuleOptionObj["attributes"]["name"]);
+    setSelectedRule(selectedRuleOptionObj["name"]);
   };
 
   return {

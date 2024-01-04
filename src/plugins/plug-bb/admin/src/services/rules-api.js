@@ -1,29 +1,62 @@
+import { useFetchClient } from "@strapi/helper-plugin";
 import axios from "axios";
-
 const BASE_URL_PRODUCTIONS = "http://localhost:1337/api/productions/";
 const BASE_URL_TEMPS = "http://localhost:1337/api/temps/";
+// export const fetchRulesIdsAndNamesTest = async () => {
+//   const url = `http://localhost:1337/api/temps?populate=*`;
+//   try {
+//     const response = await axios.get(
+//       "http://localhost:1337/api/temps?publicationState=preview&populate=*"
+//     );
+
+//     console.log(response, "REPONSE EXTERNAL");
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//   }
+// };
+
+const token = sessionStorage.getItem("jwtToken").replace(/"/g, "");
+console.log(token);
+
+// CHAMAR DE FORMA INTERNA O ENDPOIINT
+export const useRulesIdsAndNames = () => {
+  const fetchClient = useFetchClient();
+
+  const fetchRulesIdsAndNames = async () => {
+    try {
+      const response = await fetchClient.get("/plug-bb/pre-prod-rules/all");
+      return response; // Ou processar os dados conforme necessário
+    } catch (error) {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+      throw error; // ou tratar o erro de outra maneira
+    }
+  };
+
+  return fetchRulesIdsAndNames;
+};
 export const fetchRulesIdsAndNames = async () => {
-  const url = `http://localhost:1337/api/temps?populate=*`;
   try {
     const response = await axios.get(
+      "http://localhost:1337/plug-bb/pre-prod-rules/all",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const responseTest = await axios.get(
       "http://localhost:1337/api/temps?publicationState=preview&populate=*"
     );
 
-    console.log(response.data["data"]);
+    console.log(response.data, "###");
+    console.log(responseTest.data, "test");
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
-  }
-};
-
-export const fetchRulesWithTemps = async (idRule) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL_PRODUCTIONS}${idRule}?populate=temps`
-    );
-    return response.data["data"];
-  } catch (error) {
-    console.error("Erro ao buscar dados da coleção:", error.message);
   }
 };
 
@@ -63,12 +96,15 @@ export const deleteAfterUpdate = async (statsFromUpdate, preProdRule) => {
 };
 
 export const updateRule = async (preProdRule, prodRule) => {
+  console.log(preProdRule, "preProdRule UPDATE SECTION");
+  console.log(prodRule, "prodRule UPDATE SECTION");
   try {
     const headers = {
       "Content-Type": "application/json",
     };
     const idRule = prodRule["id"];
-    prodRule["rule"] = preProdRule["attributes"]["rule"];
+    prodRule["rule"] = preProdRule["rule"];
+    console.log(prodRule);
     const response = await axios.put(
       `${BASE_URL_PRODUCTIONS}${idRule}`,
       { data: prodRule },
