@@ -368,6 +368,7 @@ export interface ApiDevelopDevelop extends Schema.CollectionType {
     singularName: 'develop';
     pluralName: 'develops';
     displayName: 'Develop';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -481,6 +482,7 @@ export interface ApiTempTemp extends Schema.CollectionType {
     issueLink: Attribute.String;
     rule: Attribute.JSON;
     description: Attribute.Text;
+    scheduler: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -13,24 +13,27 @@ import {
   JSONInput,
   Typography,
   Link,
+  Field,
 } from "@strapi/design-system";
 
 const RuleDisplay = ({ rule, title, link, isProd }) => (
   <Box paddingTop={5}>
     <Flex direction="column" display="inline" gap={4}>
-      <FieldLabel>
-        <Typography variant={"beta"}>{title}</Typography>
-        {link && (
-          <Box paddingLeft={2}>
-            <Link href={link} isExternal />
-          </Box>
-        )}
-      </FieldLabel>
-      <FieldInput
-        disabled
-        value={isProd ? rule["Name"] : rule["name"]}
-        type="text"
-      />
+      <Field name="rule" required={true}>
+        <FieldLabel>
+          <Typography variant={"beta"}>{title}</Typography>
+          {link && (
+            <Box paddingLeft={2}>
+              <Link href={link} isExternal />
+            </Box>
+          )}
+        </FieldLabel>
+        <FieldInput
+          disabled
+          value={isProd ? rule["Name"] : rule["name"]}
+          type="text"
+        />
+      </Field>
       <Typography variant="epsilon">{rule["description"]}</Typography>
       <JSONInput
         paddingTop={4}

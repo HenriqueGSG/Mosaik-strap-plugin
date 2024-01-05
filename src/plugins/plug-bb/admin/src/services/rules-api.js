@@ -2,19 +2,6 @@ import { useFetchClient } from "@strapi/helper-plugin";
 import axios from "axios";
 const BASE_URL_PRODUCTIONS = "http://localhost:1337/api/productions/";
 const BASE_URL_TEMPS = "http://localhost:1337/api/temps/";
-// export const fetchRulesIdsAndNamesTest = async () => {
-//   const url = `http://localhost:1337/api/temps?populate=*`;
-//   try {
-//     const response = await axios.get(
-//       "http://localhost:1337/api/temps?publicationState=preview&populate=*"
-//     );
-
-//     console.log(response, "REPONSE EXTERNAL");
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//   }
-// };
 
 const token = sessionStorage.getItem("jwtToken").replace(/"/g, "");
 console.log(token);
@@ -38,6 +25,8 @@ export const useRulesIdsAndNames = () => {
 
   return fetchRulesIdsAndNames;
 };
+
+// APLICAR A LOGICA DE PASSAR UMA DATA PARA O ENDPOINT DE UPDATE
 export const fetchRulesIdsAndNames = async () => {
   try {
     const response = await axios.get(
