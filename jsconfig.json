@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "react",
     "moduleResolution": "nodenext",
+    "types": ["jest"],
     "target": "ES2021",
     "checkJs": true,
     "allowJs": true

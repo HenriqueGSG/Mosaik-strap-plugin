@@ -53,7 +53,11 @@ const DialogUpdate = ({ handleUpdateRule }) => {
               </Button>
             }
             endAction={
-              <Button variant="danger-light" startIcon={<Trash />}>
+              <Button
+                variant="danger-light"
+                onClick={() => handleUpdateRule()}
+                startIcon={<Trash />}
+              >
                 Confirm
               </Button>
             }

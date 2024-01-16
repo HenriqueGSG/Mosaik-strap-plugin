@@ -1,12 +1,10 @@
-module.exports = {
-  // DENFINIR A LOGICA PARA CADA ROTA
+module.exports = ({ strapi }) => ({
   async getPreProdRules(ctx) {
     try {
       const data = await strapi.entityService.findMany("api::temp.temp", {
         publicationState: "preview",
         populate: "*",
       });
-      console.log(data);
       ctx.send(data);
     } catch (err) {
       ctx.throw(500, "Erro interno do servidor");
@@ -16,55 +14,38 @@ module.exports = {
     const { id, scheduler } = ctx.request.body;
 
     try {
-      if (scheduler) {
-        // Se uma data de agendamento for fornecida, apenas atualize o campo scheduler
-        // fluxo diferente para scheduler
-        const updatedTemp = await strapi.entityService.update(
-          "api::temp.temp",
-          id,
+      // Se nenhuma data for fornecida, execute a operação de atualização e exclusão imediatamente
+
+      // fluxo padrao ja utilizado
+      const temp = await strapi.entityService.findOne("api::temp.temp", id, {
+        populate: { production: true },
+      });
+      console.log(temp, "################");
+      if (temp && temp.production) {
+        // Atualize a entrada correspondente em 'production'
+        await strapi.entityService.update(
+          "api::production.production",
+          temp.production.id,
           {
             data: {
-              scheduler,
+              Name: temp.name,
+              // copie outros campos conforme necessário
             },
           }
         );
-        ctx.send({
-          message: "Temp entry scheduled successfully",
-          data: updatedTemp,
-        });
+
+        // Delete a entrada 'temp' após a atualização
+        await strapi.entityService.delete("api::temp.temp", id);
+        ctx.send({ message: "Temp entry updated and deleted immediately" });
       } else {
-        // Se nenhuma data for fornecida, execute a operação de atualização e exclusão imediatamente
-
-        // fluxo padrao ja utilizado
-        const temp = await strapi.entityService.findOne("api::temp.temp", id, {
-          populate: { production: true },
+        ctx.send({
+          message:
+            "No associated production entry found or temp entry does not exist.",
         });
-
-        if (temp && temp.production) {
-          // Atualize a entrada correspondente em 'production'
-          await strapi.entityService.update(
-            "api::production.production",
-            temp.production.id,
-            {
-              data: {
-                Name: temp.name,
-                // copie outros campos conforme necessário
-              },
-            }
-          );
-
-          // Delete a entrada 'temp' após a atualização
-          await strapi.entityService.delete("api::temp.temp", id);
-          ctx.send({ message: "Temp entry updated and deleted immediately" });
-        } else {
-          ctx.send({
-            message:
-              "No associated production entry found or temp entry does not exist.",
-          });
-        }
       }
     } catch (err) {
       ctx.throw(500, "Erro interno do servidor");
     }
   },
-};
+});
+// DENFINIR A LOGICA PARA CADA ROTA
