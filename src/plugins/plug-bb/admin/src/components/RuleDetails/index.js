@@ -17,7 +17,7 @@ import {
 } from "@strapi/design-system";
 
 const RuleDisplay = ({ rule, title, link, isProd }) => (
-  <Box paddingTop={5}>
+  <Box paddingTop={4}>
     <Flex direction="column" display="inline" gap={4}>
       <Field name="rule" required={true}>
         <FieldLabel>
@@ -50,12 +50,18 @@ const RuleDetails = ({ prodRule, preProdRules }) => {
   console.log(preProdRules);
   return (
     <>
-      <Box paddingTop={5} gap={10}>
-        <RuleDisplay rule={prodRule} title="Regra PROD" isProd={true} />
+      <Box paddingTop={4} gap={10}>
+        <RuleDisplay
+          rule={prodRule}
+          title="Regra PROD"
+          isProd={true}
+          link={undefined}
+        />
         <RuleDisplay
           rule={preProdRules}
           title="Regra PRÉ-PROD"
           link={preProdRules["issueLink"]}
+          isProd={undefined}
         />
       </Box>
     </>
