@@ -1,3 +1,4 @@
+import RefreshCache from "./extensions/components/RefreshCache";
 import favicon from "./extensions/favicon.png";
 
 const config = {
@@ -8,6 +9,10 @@ const config = {
 
 const bootstrap = (app) => {
   console.log(app);
+  app.injectContentManagerComponent("listView", "actions", {
+    name: "RefreshCache",
+    Component: RefreshCache,
+  });
 };
 
 export default {

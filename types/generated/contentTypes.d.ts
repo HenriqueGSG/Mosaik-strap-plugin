@@ -362,6 +362,137 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiDevelopDevelop extends Schema.CollectionType {
+  collectionName: 'develops';
+  info: {
+    singularName: 'develop';
+    pluralName: 'develops';
+    displayName: 'Develop';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    rule: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::develop.develop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::develop.develop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomogationHomogation extends Schema.CollectionType {
+  collectionName: 'homogations';
+  info: {
+    singularName: 'homogation';
+    pluralName: 'homogations';
+    displayName: 'Homogation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::homogation.homogation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::homogation.homogation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductionProduction extends Schema.CollectionType {
+  collectionName: 'productions';
+  info: {
+    singularName: 'production';
+    pluralName: 'productions';
+    displayName: 'Production';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    rule: Attribute.JSON;
+    temp: Attribute.Relation<
+      'api::production.production',
+      'oneToOne',
+      'api::temp.temp'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::production.production',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::production.production',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTempTemp extends Schema.CollectionType {
+  collectionName: 'temps';
+  info: {
+    singularName: 'temp';
+    pluralName: 'temps';
+    displayName: 'Temp';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    production: Attribute.Relation<
+      'api::temp.temp',
+      'oneToOne',
+      'api::production.production'
+    >;
+    name: Attribute.String;
+    issueLink: Attribute.String;
+    rule: Attribute.JSON;
+    description: Attribute.Text;
+    scheduler: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::temp.temp', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::temp.temp', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -676,137 +807,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiDevelopDevelop extends Schema.CollectionType {
-  collectionName: 'develops';
-  info: {
-    singularName: 'develop';
-    pluralName: 'develops';
-    displayName: 'Develop';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    rule: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::develop.develop',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::develop.develop',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiHomogationHomogation extends Schema.CollectionType {
-  collectionName: 'homogations';
-  info: {
-    singularName: 'homogation';
-    pluralName: 'homogations';
-    displayName: 'Homogation';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::homogation.homogation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::homogation.homogation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProductionProduction extends Schema.CollectionType {
-  collectionName: 'productions';
-  info: {
-    singularName: 'production';
-    pluralName: 'productions';
-    displayName: 'Production';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    rule: Attribute.JSON;
-    temp: Attribute.Relation<
-      'api::production.production',
-      'oneToOne',
-      'api::temp.temp'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::production.production',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::production.production',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTempTemp extends Schema.CollectionType {
-  collectionName: 'temps';
-  info: {
-    singularName: 'temp';
-    pluralName: 'temps';
-    displayName: 'Temp';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    production: Attribute.Relation<
-      'api::temp.temp',
-      'oneToOne',
-      'api::production.production'
-    >;
-    name: Attribute.String;
-    issueLink: Attribute.String;
-    rule: Attribute.JSON;
-    description: Attribute.Text;
-    scheduler: Attribute.DateTime;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::temp.temp', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::temp.temp', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -817,16 +817,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::develop.develop': ApiDevelopDevelop;
+      'api::homogation.homogation': ApiHomogationHomogation;
+      'api::production.production': ApiProductionProduction;
+      'api::temp.temp': ApiTempTemp;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::develop.develop': ApiDevelopDevelop;
-      'api::homogation.homogation': ApiHomogationHomogation;
-      'api::production.production': ApiProductionProduction;
-      'api::temp.temp': ApiTempTemp;
     }
   }
 }

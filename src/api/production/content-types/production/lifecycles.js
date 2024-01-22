@@ -8,7 +8,7 @@ module.exports = {
   async beforeUpdate(event) {
     // VERIFICAR SE USUARIO ESTA AUTENTICADO
     const logFileName = event.params.data["Name"];
-    const filePath = path.resolve(__dirname, "logs", logFileName + ".log");
+    const filePath = path.resolve(__dirname, "../logs", logFileName + ".log");
     console.log(filePath);
     console.log(fs.existsSync(filePath));
     if (fs.existsSync(filePath)) {
