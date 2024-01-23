@@ -1,6 +1,6 @@
 const winston = require("winston");
 
-function createLogger(logFileName) {
+function createLogger(logFileName, enviroment) {
   return winston.createLogger({
     level: "info",
     format: winston.format.combine(
@@ -16,7 +16,9 @@ function createLogger(logFileName) {
       })
     ),
     transports: [
-      new winston.transports.File({ filename: `logs/${logFileName}.log` }),
+      new winston.transports.File({
+        filename: `src/logs/${enviroment}/${logFileName}.log`,
+      }),
     ],
   });
 }
