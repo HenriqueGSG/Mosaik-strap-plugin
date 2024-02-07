@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/environment",
+      "handler": "environment.find",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

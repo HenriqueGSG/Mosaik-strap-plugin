@@ -16,6 +16,9 @@ const RefreshCache = () => {
     )
       .then((resp) => resp.json())
       .then((data) => console.log(data["dados"]));
+    await fetch("/api/environment")
+      .then((resp) => resp.json())
+      .then((data) => console.log(data));
   };
 
   return (
