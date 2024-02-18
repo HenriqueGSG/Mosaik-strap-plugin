@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: apw-ruller-cms
+  description: Applicação Strapi que é utilizada como cms para as regras do Mosaik
+  tags:
+    - strapi
+    - backstage
+    - ruller
+    - apw
+    - mosaik
+    - cms
+spec:
+  type: service
+  lifecycle: experimental
+  owner: mosaik
+  repo: https://github.com/HenriqueGSG/Mosaik-strap-plugin
