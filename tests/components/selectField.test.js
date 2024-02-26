@@ -19,6 +19,17 @@ jest.mock("@strapi/design-system", () => {
         {children} {active ? "active" : ""} {size}
       </span>
     ),
+    // Mock do Button
+    Button: ({ children, onClick, variant, size, disabled }) => (
+      <button
+        onClick={onClick}
+        data-variant={variant}
+        data-size={size}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    ),
     // Adicione mocks para outros componentes, se necessário
   };
 });
@@ -35,12 +46,9 @@ import SelectField from "../../src/plugins/plug-bb/admin/src/components/SelectFi
 test(`Component Text`, () => {
   const handleSelectChangeMock = jest.fn();
 
-  // Dados fictícios para passar como prop 'selectFieldData'
-
   const selectFieldData = [
     { id: "1", name: "Opção 1", production: true },
     { id: "2", name: "Opção 2", production: false },
-    // Adicione mais opções conforme necessário
   ];
 
   render(
@@ -51,8 +59,6 @@ test(`Component Text`, () => {
     />
   );
 
-  // Verifica se as opções são renderizadas
-
   selectFieldData.forEach((option) => {
     console.log(option);
     expect(screen.getByText(option.name)).toBeInTheDocument();
@@ -61,15 +67,7 @@ test(`Component Text`, () => {
   const selectFieldLabel = screen.getByLabelText("Regras em produção");
   expect(selectFieldLabel).toBeInTheDocument();
 
-  // Simula a seleção de uma opção
   fireEvent.change(screen.getByLabelText("Regras em produção"), {
     target: { value: JSON.stringify(selectFieldData[0]) },
   });
-
-  // Verifica se a função handleSelectChange foi chamada
-  // expect(handleSelectChangeMock).toHaveBeenCalledWith(
-  //   JSON.stringify(selectFieldData[0])
-  // );
-  // expect(true).to
-  //   expect(true).toBe(true);
 });

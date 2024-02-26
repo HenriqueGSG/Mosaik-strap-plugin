@@ -15,20 +15,7 @@
     "test": "jest --forceExit "
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/api/**/*.js"
-    ],
-    "coverageReporters": [
-      "clover",
-      "json",
-      "text"
-    ],
     "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "node_modules/(?!(@strapi)/)",
-      ".tmp",
-      ".cache"
-    ],
     "transform": {
       "\\.[jt]sx?$": "babel-jest"
     }
